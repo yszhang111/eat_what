@@ -1,0 +1,76 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { Utensils, Coffee, ShoppingBag } from 'lucide-react';
+import styles from './ModeSelection.module.css';
+
+interface ModeSelectionProps {
+  onSelectMode: (mode: 'canteen' | 'fast-food' | 'ordering') => void;
+}
+
+export default function ModeSelection({ onSelectMode }: ModeSelectionProps) {
+  const variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  return (
+    <div className={styles.container}>
+      <motion.h1 
+        className={styles.title}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        今天吃什么？
+      </motion.h1>
+      
+      <div className={styles.grid}>
+        <motion.div 
+          className={styles.card}
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.1 }}
+          onClick={() => onSelectMode('canteen')}
+          whileHover={{ scale: 1.05, borderColor: 'var(--primary)' }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Utensils size={48} className={styles.icon} />
+          <h2>食堂模式</h2>
+          <p>Canteen</p>
+        </motion.div>
+
+        <motion.div 
+          className={styles.card}
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.2 }}
+          onClick={() => onSelectMode('fast-food')}
+          whileHover={{ scale: 1.05, borderColor: 'var(--secondary)' }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Coffee size={48} className={styles.icon} />
+          <h2>快餐模式</h2>
+          <p>Fast Food</p>
+        </motion.div>
+
+        <motion.div 
+          className={styles.card}
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.3 }}
+          onClick={() => onSelectMode('ordering')}
+          whileHover={{ scale: 1.05, borderColor: 'var(--accent)' }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ShoppingBag size={48} className={styles.icon} />
+          <h2>点餐模式</h2>
+          <p>Ordering</p>
+        </motion.div>
+      </div>
+    </div>
+  );
+}

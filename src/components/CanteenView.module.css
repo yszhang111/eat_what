@@ -1,0 +1,169 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80vh;
+  padding: 2rem;
+  position: relative;
+  width: 100%;
+}
+
+.backButton {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+.backButton:hover {
+  color: #fff;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: var(--primary);
+  text-align: center;
+}
+
+.content {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.diceContainer {
+  margin-bottom: 4rem;
+  height: 150px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statusText {
+  font-size: 1.5rem;
+  color: var(--accent);
+  margin-bottom: 2rem;
+}
+
+.resultCard {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(16px);
+  padding: 3rem;
+  border-radius: 2rem;
+  text-align: center;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 50px rgba(6, 182, 212, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.resultCard h3 {
+  font-size: 1.5rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.resultText {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.areaText {
+  font-size: 5rem;
+  font-weight: 900;
+  background: linear-gradient(to right, #fff, #cbd5e1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.floorText {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.randomButton {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 2rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin-top: 1rem;
+}
+
+.randomButton:hover {
+  transform: scale(1.05);
+}
+
+.randomButton:active {
+  transform: scale(0.95);
+}
+
+.selectionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 2rem;
+}
+
+.selectionCard {
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+}
+
+.selectionCard:hover {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: var(--primary);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.selectionCard h3 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #fff;
+}
+
+.selectionCard p {
+  color: #94a3b8;
+  margin: 0;
+  text-align: center;
+}

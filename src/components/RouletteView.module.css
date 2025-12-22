@@ -1,0 +1,120 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80vh;
+  padding: 2rem;
+  position: relative;
+  width: 100%;
+}
+
+.backButton {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+.backButton:hover {
+  color: #fff;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: var(--primary);
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+}
+
+.diceWrapper {
+  margin-bottom: 3rem;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rollingText {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cyclingOption {
+  font-size: 2rem;
+  color: #94a3b8;
+  opacity: 0.8;
+}
+
+.resultCard {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(16px);
+  padding: 3rem;
+  border-radius: 2rem;
+  text-align: center;
+  border: 2px solid var(--secondary);
+  box-shadow: 0 0 50px rgba(236, 72, 153, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  min-width: 300px;
+}
+
+.resultCard h3 {
+  font-size: 1.5rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.resultText {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(to right, #fff, var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 1rem 0;
+}
+
+.spinButton {
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 2rem;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.spinButton:hover {
+  transform: scale(1.05);
+}
+
+.spinButton:active {
+  transform: scale(0.95);
+}

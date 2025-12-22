@@ -12,16 +12,17 @@ export const CANTEEN_DATA: Record<CanteenArea, string[]> = {
 };
 
 export const FAST_FOOD_OPTIONS = [
-  "肯德基 (KFC)",
-  "麦当劳 (McDonald's)",
-  "喜家德 (Xijiade)",
+  "肯德基",
+  "麦当劳",
+  "喜家德",
 ];
 
 export const ORDERING_OPTIONS = [
-  "眉州东坡 (Meizhou Dongpo)",
-  "私厨家宴 (Private Kitchen)",
-  "局气 (Juqi)",
-  "阿家 (Ajia)",
-  "粤菜 (Cantonese)",
-  "潇湘阁 (Xiaoxiangge)",
+  "眉州东坡",
+  "私厨家宴",
+  "局气",
+  "阿家",
+  "粤菜",
+  "潇湘阁",
+  "紫光园"
 ];

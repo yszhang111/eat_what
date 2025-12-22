@@ -53,29 +53,48 @@ export async function POST(req: Request) {
           return;
         }
         const reader = response.body.getReader();
+        let buffer = ''; // Buffer for incomplete lines
 
         try {
           while (true) {
             const { done, value } = await reader.read();
             if (done) break;
             
-            const chunk = decoder.decode(value);
-            const lines = chunk.split('\n');
+            // Decode and append to buffer
+            buffer += decoder.decode(value, { stream: true });
             
+            // Split by newlines
+            const lines = buffer.split('\n');
+            
+            // Keep the last potentially incomplete line in the buffer
+            buffer = lines.pop() || '';
+            
+            // Process complete lines
             for (const line of lines) {
-              if (line.startsWith('data: ') && line !== 'data: [DONE]') {
+              if (line.trim() === '') continue;
+              
+              if (line.startsWith('data: ')) {
+                const data = line.slice(6).trim();
+                
+                if (data === '[DONE]') {
+                  continue;
+                }
+                
                 try {
-                  const data = JSON.parse(line.slice(6));
-                  const content = data.choices[0]?.delta?.content || '';
+                  const parsed = JSON.parse(data);
+                  const content = parsed.choices?.[0]?.delta?.content || '';
                   if (content) {
                     controller.enqueue(encoder.encode(content));
                   }
                 } catch (e) {
-                  console.error('Error parsing chunk', e);
+                  // Skip invalid JSON silently
+                  console.error('JSON parse error:', e, 'Data:', data.substring(0, 100));
                 }
               }
             }
           }
+        } catch (error) {
+          console.error('Stream error:', error);
         } finally {
           controller.close();
         }

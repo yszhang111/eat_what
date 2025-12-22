@@ -26,3 +26,13 @@ export const ORDERING_OPTIONS = [
   "潇湘阁",
   "紫光园"
 ];
+
+export const BEVERAGE_OPTIONS = [
+  "Starbucks",
+  "Peets",
+  "Lavazza",
+  "瑞幸 (Luckin)",
+  "喜茶 (Heytea)",
+  "霸王茶姬 (Chagee)",
+  "巴黎贝甜 (Paris Baguette)"
+];

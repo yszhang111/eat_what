@@ -5,9 +5,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import ModeSelection from '@/components/ModeSelection';
 import RouletteView from '@/components/RouletteView';
 import CanteenView from '@/components/CanteenView';
-import { FAST_FOOD_OPTIONS, ORDERING_OPTIONS } from '@/data/options';
+import { FAST_FOOD_OPTIONS, ORDERING_OPTIONS, BEVERAGE_OPTIONS } from '@/data/options';
 
-type ViewMode = 'home' | 'canteen' | 'fast-food' | 'ordering';
+type ViewMode = 'home' | 'canteen' | 'fast-food' | 'ordering' | 'beverage';
 
 export default function Home() {
   const [mode, setMode] = useState<ViewMode>('home');
@@ -58,6 +58,22 @@ export default function Home() {
             <RouletteView 
               title="点餐模式 (Ordering)" 
               options={ORDERING_OPTIONS} 
+              onBack={() => setMode('home')} 
+            />
+          </motion.div>
+        )}
+
+        {mode === 'beverage' && (
+          <motion.div
+            key="beverage"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <RouletteView 
+              title="饮料模式 (Beverage)" 
+              options={BEVERAGE_OPTIONS} 
               onBack={() => setMode('home')} 
             />
           </motion.div>

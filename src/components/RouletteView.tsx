@@ -79,7 +79,7 @@ export default function RouletteView({ options, title, onBack }: RouletteViewPro
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", bounce: 0.6 }}
           >
-             <h3>去这里吃:</h3>
+             <h3>去这里:</h3>
              <div className={styles.resultText}>{finalResult}</div>
              <button onClick={spin} className={styles.spinButton}>
                <Sparkles size={20} /> 再来一次

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Eat What? - Random Food Picker",
+  title: "京东吃什么？？？",
   description: "Decide what to eat with style.",
   viewport: "width=device-width, initial-scale=1, maximum-scale=5",
 };

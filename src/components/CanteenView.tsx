@@ -114,7 +114,7 @@ export default function CanteenView({ onBack }: CanteenViewProps) {
             animate={{ scale: 1, opacity: 1, rotateX: 0 }}
             transition={{ type: "spring", bounce: 0.5 }}
           >
-            <h3>去这里吃:</h3>
+            <h3>去这里:</h3>
             <div className={styles.resultText}>
               <span className={styles.areaText}>{result.area}</span>
               {result.floor && <span className={styles.floorText}>{result.floor}</span>}

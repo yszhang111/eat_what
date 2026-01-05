@@ -12,7 +12,6 @@ export const CANTEEN_DATA: Record<CanteenArea, string[]> = {
 };
 
 export const FAST_FOOD_OPTIONS = [
-  "肯德基",
   "麦当劳",
   "喜家德",
 ];

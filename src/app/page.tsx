@@ -7,6 +7,7 @@ import RouletteView from '@/components/RouletteView';
 import CanteenView from '@/components/CanteenView';
 import { FAST_FOOD_OPTIONS, ORDERING_OPTIONS, BEVERAGE_OPTIONS } from '@/data/options';
 import ChatBot from '@/components/ChatBot';
+import AnnouncementModal from '@/components/AnnouncementModal';
 
 type ViewMode = 'home' | 'canteen' | 'fast-food' | 'ordering' | 'beverage';
 
@@ -94,6 +95,7 @@ export default function Home() {
       </AnimatePresence>
       
       <ChatBot />
+      <AnnouncementModal />
     </main>
   );
 }

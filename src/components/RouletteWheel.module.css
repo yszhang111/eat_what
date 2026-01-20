@@ -1,0 +1,70 @@
+.wheelContainer {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 2rem auto;
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 4px solid #334;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  transition: transform 4s cubic-bezier(0.1, 0.05, 0.1, 1);
+}
+
+.pointer {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; 
+  height: 0; 
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid #ff4444;
+  z-index: 10;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+}
+
+.spinButton {
+  display: block;
+  margin: 2rem auto;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  transition: all 0.2s;
+  z-index: 20;
+}
+
+.spinButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.spinButton:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}
+
+.spinButton:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+.result {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}

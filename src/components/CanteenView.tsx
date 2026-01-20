@@ -1,28 +1,38 @@
-'use client';
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Sparkles, MapPin, Building2 } from 'lucide-react';
+import { ArrowLeft, Sparkles, MapPin, Building2, Disc } from 'lucide-react';
 import { CANTEEN_DATA, CanteenArea } from '@/data/options';
 import Dice from './Dice';
+import RouletteWheel from './RouletteWheel';
 import styles from './CanteenView.module.css';
 
 interface CanteenViewProps {
   onBack: () => void;
 }
 
-type SubMode = 'none' | 'area-only' | 'area-floor';
+type SubMode = 'none' | 'area-only' | 'area-floor' | 'roulette-wheel';
 
 export default function CanteenView({ onBack }: CanteenViewProps) {
   const [subMode, setSubMode] = useState<SubMode>('none');
   const [result, setResult] = useState<{ area: string; floor?: string } | null>(null);
   const [isRolling, setIsRolling] = useState(false);
 
-
+  // Memoize the flattened options for the roulette wheel
+  const rouletteOptions = useMemo(() => {
+    const options: string[] = [];
+    Object.entries(CANTEEN_DATA).forEach(([area, floors]) => {
+      floors.forEach(floor => {
+        options.push(`${area} - ${floor}`);
+      });
+    });
+    return options;
+  }, []);
 
   const handleSubModeSelect = (mode: SubMode) => {
     setSubMode(mode);
-    startRolling(mode);
+    if (mode !== 'roulette-wheel') {
+      startRolling(mode);
+    }
   };
 
   const startRolling = (mode: SubMode = subMode) => {
@@ -33,7 +43,7 @@ export default function CanteenView({ onBack }: CanteenViewProps) {
     setTimeout(() => {
       const areas = Object.keys(CANTEEN_DATA) as CanteenArea[];
       const randomArea = areas[Math.floor(Math.random() * areas.length)];
-      
+
       if (mode === 'area-floor') {
         const floors = CANTEEN_DATA[randomArea];
         const randomFloor = floors[Math.floor(Math.random() * floors.length)];
@@ -41,7 +51,7 @@ export default function CanteenView({ onBack }: CanteenViewProps) {
       } else {
         setResult({ area: randomArea });
       }
-      
+
       setIsRolling(false);
     }, 2500);
   };
@@ -52,7 +62,7 @@ export default function CanteenView({ onBack }: CanteenViewProps) {
         <ArrowLeft size={24} /> Back
       </button>
 
-      <motion.h2 
+      <motion.h2
         className={styles.title}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -63,7 +73,7 @@ export default function CanteenView({ onBack }: CanteenViewProps) {
       <div className={styles.content}>
         {subMode === 'none' ? (
           <div className={styles.selectionGrid}>
-            <motion.div 
+            <motion.div
               className={styles.selectionCard}
               onClick={() => handleSubModeSelect('area-only')}
               whileHover={{ scale: 1.05 }}
@@ -77,7 +87,7 @@ export default function CanteenView({ onBack }: CanteenViewProps) {
               <p>Select Canteen Only</p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className={styles.selectionCard}
               onClick={() => handleSubModeSelect('area-floor')}
               whileHover={{ scale: 1.05 }}
@@ -90,41 +100,62 @@ export default function CanteenView({ onBack }: CanteenViewProps) {
               <h3>选食堂+楼层</h3>
               <p>Canteen + Floor</p>
             </motion.div>
+
+            <motion.div
+              className={styles.selectionCard}
+              onClick={() => handleSubModeSelect('roulette-wheel')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <Disc size={48} className="text-pink-400" />
+              <h3>大转盘</h3>
+              <p>Spin the Wheel</p>
+            </motion.div>
           </div>
+        ) : subMode === 'roulette-wheel' ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+          >
+            <RouletteWheel items={rouletteOptions} />
+          </motion.div>
         ) : (
           <>
             <div className={styles.diceContainer}>
               <Dice isRolling={isRolling} />
             </div>
 
-        {isRolling && (
-          <motion.div 
-            className={styles.statusText}
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-          >
-            选一个.....
-          </motion.div>
-        )}
+            {isRolling && (
+              <motion.div
+                className={styles.statusText}
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+              >
+                选一个.....
+              </motion.div>
+            )}
 
-        {!isRolling && result && (
-          <motion.div 
-            className={styles.resultCard}
-            initial={{ scale: 0.5, opacity: 0, rotateX: -90 }}
-            animate={{ scale: 1, opacity: 1, rotateX: 0 }}
-            transition={{ type: "spring", bounce: 0.5 }}
-          >
-            <h3>去这里:</h3>
-            <div className={styles.resultText}>
-              <span className={styles.areaText}>{result.area}</span>
-              {result.floor && <span className={styles.floorText}>{result.floor}</span>}
-            </div>
-            <button onClick={() => startRolling()} className={styles.randomButton}>
-              <Sparkles size={18} /> 再来一次
-            </button>
-          </motion.div>
-        )}
-        </>
+            {!isRolling && result && (
+              <motion.div
+                className={styles.resultCard}
+                initial={{ scale: 0.5, opacity: 0, rotateX: -90 }}
+                animate={{ scale: 1, opacity: 1, rotateX: 0 }}
+                transition={{ type: "spring", bounce: 0.5 }}
+              >
+                <h3>去这里:</h3>
+                <div className={styles.resultText}>
+                  <span className={styles.areaText}>{result.area}</span>
+                  {result.floor && <span className={styles.floorText}>{result.floor}</span>}
+                </div>
+                <button onClick={() => startRolling()} className={styles.randomButton}>
+                  <Sparkles size={18} /> 再来一次
+                </button>
+              </motion.div>
+            )}
+          </>
         )}
       </div>
     </div>

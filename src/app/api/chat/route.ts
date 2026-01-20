@@ -15,22 +15,22 @@ export async function POST(req: Request) {
       content: basePrompt
     };
 
-    const apiKey = process.env.GROK_API_KEY;
+    const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
-        { error: 'GROK_API_KEY is not set' },
+        { error: 'OPENAI_API_KEY is not set' },
         { status: 500 }
       );
     }
 
-    const response = await fetch('https://api.x.ai/v1/chat/completions', {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'grok-4-1-fast-non-reasoning',
+        model: 'gpt-5.2',
         messages: [systemMessage, ...messages],
         stream: true,
         temperature: 0.7
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     // Handle streaming response
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
-    
+
     const stream = new ReadableStream({
       async start(controller) {
         if (!response.body) {
@@ -59,27 +59,27 @@ export async function POST(req: Request) {
           while (true) {
             const { done, value } = await reader.read();
             if (done) break;
-            
+
             // Decode and append to buffer
             buffer += decoder.decode(value, { stream: true });
-            
+
             // Split by newlines
             const lines = buffer.split('\n');
-            
+
             // Keep the last potentially incomplete line in the buffer
             buffer = lines.pop() || '';
-            
+
             // Process complete lines
             for (const line of lines) {
               if (line.trim() === '') continue;
-              
+
               if (line.startsWith('data: ')) {
                 const data = line.slice(6).trim();
-                
+
                 if (data === '[DONE]') {
                   continue;
                 }
-                
+
                 try {
                   const parsed = JSON.parse(data);
                   const content = parsed.choices?.[0]?.delta?.content || '';

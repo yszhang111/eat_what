@@ -7,7 +7,6 @@ import RouletteView from '@/components/RouletteView';
 import CanteenView from '@/components/CanteenView';
 import { FAST_FOOD_OPTIONS, ORDERING_OPTIONS, BEVERAGE_OPTIONS } from '@/data/options';
 import ChatBot from '@/components/ChatBot';
-import AnnouncementModal from '@/components/AnnouncementModal';
 
 type ViewMode = 'home' | 'canteen' | 'fast-food' | 'ordering' | 'beverage';
 
@@ -15,8 +14,8 @@ export default function Home() {
   const [mode, setMode] = useState<ViewMode>('home');
 
   return (
-    <main style={{ 
-      minHeight: '100vh', 
+    <main style={{
+      minHeight: '100vh',
       background: 'radial-gradient(circle at top center, #1e293b 0%, #0f172a 100%)',
       overflow: 'hidden'
     }}>
@@ -41,10 +40,10 @@ export default function Home() {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <RouletteView 
-              title="快餐模式 (Fast Food)" 
-              options={FAST_FOOD_OPTIONS} 
-              onBack={() => setMode('home')} 
+            <RouletteView
+              title="快餐模式 (Fast Food)"
+              options={FAST_FOOD_OPTIONS}
+              onBack={() => setMode('home')}
             />
           </motion.div>
         )}
@@ -57,10 +56,10 @@ export default function Home() {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <RouletteView 
-              title="点餐模式 (Ordering)" 
-              options={ORDERING_OPTIONS} 
-              onBack={() => setMode('home')} 
+            <RouletteView
+              title="点餐模式 (Ordering)"
+              options={ORDERING_OPTIONS}
+              onBack={() => setMode('home')}
             />
           </motion.div>
         )}
@@ -73,10 +72,10 @@ export default function Home() {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <RouletteView 
-              title="饮料模式 (Beverage)" 
-              options={BEVERAGE_OPTIONS} 
-              onBack={() => setMode('home')} 
+            <RouletteView
+              title="饮料模式 (Beverage)"
+              options={BEVERAGE_OPTIONS}
+              onBack={() => setMode('home')}
             />
           </motion.div>
         )}
@@ -93,9 +92,8 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       <ChatBot />
-      <AnnouncementModal />
     </main>
   );
 }

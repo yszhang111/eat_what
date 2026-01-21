@@ -14,6 +14,7 @@ export const CANTEEN_DATA: Record<CanteenArea, string[]> = {
 export const FAST_FOOD_OPTIONS = [
   "麦当劳",
   "喜家德",
+  "肯德基",
 ];
 
 export const ORDERING_OPTIONS = [
@@ -21,7 +22,7 @@ export const ORDERING_OPTIONS = [
   "私厨家宴",
   "局气",
   "阿家",
-  "粤菜",
+  "何贤记",
   "潇湘阁",
   "紫光园"
 ];

@@ -57,7 +57,7 @@ export default function Home() {
             transition={{ duration: 0.3 }}
           >
             <RouletteView
-              title="点餐模式 (Ordering)"
+              title="餐厅模式 (Ordering)"
               options={ORDERING_OPTIONS}
               onBack={() => setMode('home')}
             />

@@ -1,11 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Utensils, Coffee, ShoppingBag, CupSoda } from 'lucide-react';
+import { Utensils, Coffee, ShoppingBag, CupSoda, PencilLine } from 'lucide-react';
 import styles from './ModeSelection.module.css';
 
 interface ModeSelectionProps {
-  onSelectMode: (mode: 'canteen' | 'fast-food' | 'ordering' | 'beverage') => void;
+  onSelectMode: (mode: 'canteen' | 'fast-food' | 'ordering' | 'beverage' | 'manual') => void;
 }
 
 export default function ModeSelection({ onSelectMode }: ModeSelectionProps) {
@@ -84,6 +84,21 @@ export default function ModeSelection({ onSelectMode }: ModeSelectionProps) {
           <CupSoda size={48} className={styles.icon} />
           <h2>饮料模式</h2>
           <p>Beverage</p>
+        </motion.div>
+
+        <motion.div 
+          className={styles.card}
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.5 }}
+          onClick={() => onSelectMode('manual')}
+          whileHover={{ scale: 1.05, borderColor: '#14b8a6' }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <PencilLine size={48} className={styles.icon} style={{ color: '#14b8a6' }} />
+          <h2 style={{ color: '#14b8a6' }}>手动模式</h2>
+          <p>Manual</p>
         </motion.div>
       </div>
     </div>

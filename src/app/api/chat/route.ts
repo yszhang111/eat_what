@@ -30,7 +30,7 @@ export async function POST(req: Request) {
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-5.2',
+        model: 'gpt-5.4',
         messages: [systemMessage, ...messages],
         stream: true,
         temperature: 0.7

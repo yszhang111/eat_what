@@ -1,14 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Utensils, Coffee, ShoppingBag, CupSoda, PencilLine } from 'lucide-react';
+import { ArrowLeft, Utensils, Coffee, ShoppingBag, CupSoda, PencilLine } from 'lucide-react';
 import styles from './ModeSelection.module.css';
 
 interface ModeSelectionProps {
   onSelectMode: (mode: 'canteen' | 'fast-food' | 'ordering' | 'beverage' | 'manual') => void;
+  onBack: () => void;
 }
 
-export default function ModeSelection({ onSelectMode }: ModeSelectionProps) {
+export default function ModeSelection({ onSelectMode, onBack }: ModeSelectionProps) {
   const variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -16,6 +17,19 @@ export default function ModeSelection({ onSelectMode }: ModeSelectionProps) {
 
   return (
     <div className={styles.container}>
+      <motion.button
+        type="button"
+        className={styles.companyBack}
+        onClick={onBack}
+        initial={{ opacity: 0, x: -12 }}
+        animate={{ opacity: 1, x: 0 }}
+        whileHover={{ x: -3 }}
+        whileTap={{ scale: 0.96 }}
+      >
+        <ArrowLeft size={18} aria-hidden="true" />
+        切换公司
+      </motion.button>
+
       <motion.h1 
         className={styles.title}
         initial={{ opacity: 0, y: -20 }}

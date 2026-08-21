@@ -8,19 +8,29 @@ import CanteenView from '@/components/CanteenView';
 import ManualView from '@/components/ManualView';
 import { FAST_FOOD_OPTIONS, ORDERING_OPTIONS, BEVERAGE_OPTIONS } from '@/data/options';
 import ChatBot from '@/components/ChatBot';
+import CompanySelection from '@/components/CompanySelection';
+import styles from './page.module.css';
 
-type ViewMode = 'home' | 'canteen' | 'fast-food' | 'ordering' | 'beverage' | 'manual';
+type ViewMode = 'company' | 'home' | 'canteen' | 'fast-food' | 'ordering' | 'beverage' | 'manual';
 
 export default function Home() {
-  const [mode, setMode] = useState<ViewMode>('home');
+  const [mode, setMode] = useState<ViewMode>('company');
 
   return (
-    <main style={{
-      minHeight: '100vh',
-      background: 'radial-gradient(circle at top center, #1e293b 0%, #0f172a 100%)',
-      overflow: 'hidden'
-    }}>
+    <main className={styles.main}>
       <AnimatePresence mode="wait">
+        {mode === 'company' && (
+          <motion.div
+            key="company"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <CompanySelection onSelectJd={() => setMode('home')} />
+          </motion.div>
+        )}
+
         {mode === 'home' && (
           <motion.div
             key="home"
@@ -29,7 +39,10 @@ export default function Home() {
             exit={{ opacity: 0, x: 20 }}
             transition={{ duration: 0.3 }}
           >
-            <ModeSelection onSelectMode={setMode} />
+            <ModeSelection
+              onSelectMode={setMode}
+              onBack={() => setMode('company')}
+            />
           </motion.div>
         )}
 
@@ -106,7 +119,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      <ChatBot />
+      {mode !== 'company' && <ChatBot />}
     </main>
   );
 }
